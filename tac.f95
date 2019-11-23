@@ -29,5 +29,16 @@ program tictactoe
     read *,input
     ! Set the x variable to the first number in the input
     read (input(1:1),'(i4)') x
+    ! Choose which y coordinate to use based on the character the user input
+    select case (input(2:2))
+      case ('a')
+        y = 1
+      case ('b')
+        y = 2
+      case ('c')
+        y = 3
+      case default
+        print *,"That was not a valid input. Try again."
+    end select
   end do
 end program tictactoe
