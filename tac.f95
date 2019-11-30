@@ -10,8 +10,14 @@ program tictactoe
   ! Values to hold position to mark
   integer :: x
   integer :: y
+  ! Counter of how many loops there have been
+  integer :: loops
+  ! Array to hold move history
+  
   ! Initialize grid as empty spaces
   grid = reshape((/ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' /), (/ 3, 3 /))
+  ! Start loop coubter at 1
+  loops = 1
   ! Welcome banner
   print *,"Welcome to Tic Tac Toe!"
   ! Explain to user how to input position
@@ -40,7 +46,13 @@ program tictactoe
       case default
         print *,"That was not a valid input. Try again."
     end select
+    ! Add move to the history of moves
+    
     ! Mark 'x' at the location the position input
     grid(y, x) = 'x'
+    ! "AI" that chooses where to move
+    
+    ! Increment loop counter
+    loops = loops + 1
   end do
 end program tictactoe
