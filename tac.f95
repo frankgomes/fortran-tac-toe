@@ -40,5 +40,7 @@ program tictactoe
       case default
         print *,"That was not a valid input. Try again."
     end select
+    ! Mark 'x' at the location the position input
+    grid(y, x) = 'x'
   end do
 end program tictactoe
