@@ -46,6 +46,10 @@ program tictactoe
       case default
         print *,"That was not a valid input. Try again."
     end select
+    ! Make sure that all moves are valid
+    IF (x .GT. 3) THEN
+        PRINT *, "That was not a valid column. Try again."
+    END IF
     ! Add move to the history of moves
     
     ! Mark 'x' at the location the position input
