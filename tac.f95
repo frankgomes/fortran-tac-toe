@@ -13,7 +13,7 @@ program tictactoe
   ! Counter of how many loops there have been
   integer :: loops
   ! Array to hold move history
-  
+  integer, dimension(9, 2) :: history
   ! Initialize grid as empty spaces
   grid = reshape((/ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' /), (/ 3, 3 /))
   ! Start loop coubter at 1
