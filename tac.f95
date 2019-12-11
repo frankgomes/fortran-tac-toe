@@ -46,12 +46,21 @@ program tictactoe
       case default
         print *,"That was not a valid input. Try again."
     end select
+    ! Check if the column selection was valid
+    if (x .GT. 3) 
+      print *,"That is not a valid column. Try again."
+      continue
+    end if
+    if (x .LT. 1)
+      print *,"That is not a valid column. Try again."
+      continue
+    end if
     ! Add move to the history of moves
     
     ! Mark 'x' at the location the position input
     grid(y, x) = 'x'
     ! "AI" that chooses where to move
-    
+    ! TODO: "AI"
     ! Increment loop counter
     loops = loops + 1
   end do
