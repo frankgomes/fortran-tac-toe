@@ -3,10 +3,12 @@
 ! AP Create task
 
 program tictactoe
+  ! Disable implicit typing
+  implicit none
   ! 2D array for the grid
   character, dimension(3, 3) :: grid
   ! Value to hold raw, uninterpreted user input
-  character (len = 2) :: input
+  character (len = 4) :: input
   ! Values to hold position to mark
   integer :: x
   integer :: y
@@ -22,9 +24,12 @@ program tictactoe
   print *,"Welcome to Tic Tac Toe!"
   ! Explain to user how to input position
   print *,"To enter your choice, enter the number of the column and the letter of the row."
+  ! Explain to user how to quit
+  print *,"To exit, type 'exit'."
   ! Loop infinitely and take a move every time
   do
     ! Print grid
+    print *,""
     print *," 123"
     print *,'a',grid(1, 1), grid(1, 2), grid(1, 3)
     print *,'b',grid(2, 1), grid(2, 2), grid(2, 3)
@@ -33,6 +38,11 @@ program tictactoe
     print *,"Make your move."
     ! Store input in string to interpret
     read *,input
+    ! Check if user wants to quit
+    if (input == 'exit') then
+      print *,"Goodbye!"
+      stop 
+    end if
     ! Set the x variable to the first number in the input
     read (input(1:1),'(i4)') x
     ! Choose which y coordinate to use based on the character the user input
@@ -45,18 +55,24 @@ program tictactoe
         y = 3
       case default
         print *,"That was not a valid input. Try again."
+        cycle
     end select
     ! Check if the column selection was valid
-    if (x .GT. 3) 
+    if (x > 3) then
       print *,"That is not a valid column. Try again."
-      continue
+      cycle
     end if
-    if (x .LT. 1)
+    if (x < 1) then
       print *,"That is not a valid column. Try again."
-      continue
+      cycle
+    end if
+    ! Check if area has already been marked
+    if (grid(y, x) == 'x') then
+      print *,"You have already marked there. Try again."
+      cycle
     end if
     ! Add move to the history of moves
-    
+    !history(loops, x) = y
     ! Mark 'x' at the location the position input
     grid(y, x) = 'x'
     ! "AI" that chooses where to move
