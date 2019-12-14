@@ -18,7 +18,7 @@ program tictactoe
   integer, dimension(9, 2) :: history
   ! Initialize grid as empty spaces
   grid = reshape((/ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' /), (/ 3, 3 /))
-  ! Start loop coubter at 1
+  ! Start loop counter at 1
   loops = 1
   ! Welcome banner
   print *,"Welcome to Tic Tac Toe!"
@@ -72,12 +72,116 @@ program tictactoe
       cycle
     end if
     ! Add move to the history of moves
-    !history(loops, x) = y
+    history(loops, 1) = x
+    history(loops, 2) = y
     ! Mark 'x' at the location the position input
     grid(y, x) = 'x'
+    ! Check if user won on this move
+    if (grid(1,1) == 'x') then
+      if (grid(2,1) == 'x') then
+        if (grid(3,1) == 'x') then
+          call win()
+        end if
+      end if
+      if (grid(2,2) == 'x') then
+        if (grid(3,3) == 'x') then
+          call win()
+        end if
+      end if
+      if (grid(1,2) == 'x') then
+        if (grid(1,3) == 'x') then
+          call win()
+        end if
+      end if
+    end if
+    if (grid(1,2) == 'x') then
+      if (grid(2,2) == 'x') then
+        if (grid(3,2) == 'x') then
+          call win()
+        end if
+      end if
+    end if
+    if (grid(1,3) == 'x') then
+      if (grid(2,3) == 'x') then
+        if (grid(3,3) == 'x') then
+          call win()
+        end if
+       end if
+    end if
+    if (grid(2,1) == 'x') then
+      if (grid(2,2) == 'x') then
+        if (grid(3,2) == 'x') then
+          call win()
+        end if
+      end if
+    end if
+    if (grid(3,1) == 'x') then
+      if (grid(3,2) == 'x') then
+        if (grid(3,3) == 'x') then
+          call win()
+        end if
+      end if
+    end if
     ! "AI" that chooses where to move
     ! TODO: "AI"
+    ! Check if AI won
+    if (grid(1,1) == 'o') then
+      if (grid(2,1) == 'o') then
+        if (grid(3,1) == 'o') then
+          call lose()
+        end if
+      end if
+      if (grid(2,2) == 'o') then
+        if (grid(3,3) == 'o') then
+          call lose()
+        end if
+      end if
+      if (grid(1,2) == 'o') then
+        if (grid(1,3) == 'o') then
+          call lose()
+        end if
+      end if
+    end if
+    if (grid(1,2) == 'o') then
+      if (grid(2,2) == 'o') then
+        if (grid(3,2) == 'o') then
+          call lose()
+        end if
+      end if
+    end if
+    if (grid(1,3) == 'o') then
+      if (grid(2,3) == 'o') then
+        if (grid(3,3) == 'o') then
+          call lose()
+        end if
+       end if
+    end if
+    if (grid(2,1) == 'o') then
+      if (grid(2,2) == 'o') then
+        if (grid(3,2) == 'o') then
+          call lose()
+        end if
+      end if
+    end if
+    if (grid(3,1) == 'o') then
+      if (grid(3,2) == 'o') then
+        if (grid(3,3) == 'o') then
+          call lose()
+        end if
+      end if
+    end if
     ! Increment loop counter
     loops = loops + 1
   end do
 end program tictactoe
+
+! Subroutines for winning and losing
+subroutine win()
+  print *,"You win!"
+  stop
+end subroutine win
+
+subroutine lose()
+  print *,"The computer wins!"
+  stop
+end subroutine lose
