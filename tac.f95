@@ -120,6 +120,11 @@ program tictactoe
     end if
     ! "AI" that chooses where to move
     ! TODO: "AI"
+    ! Move center if not already occupied
+    if (grid(2,2) == ' ') then
+      grid(2,2) = 'o'
+      cycle
+    end if
     ! Check if AI won
     if (grid(1,1) == 'o') then
       if (grid(2,1) == 'o') then
