@@ -29,11 +29,7 @@ program tictactoe
   ! Loop infinitely and take a move every time
   do
     ! Print grid
-    print *,""
-    print *," 123"
-    print *,'a',grid(1, 1), grid(1, 2), grid(1, 3)
-    print *,'b',grid(2, 1), grid(2, 2), grid(2, 3)
-    print *,'c',grid(3, 1), grid(3, 2), grid(3, 3)
+    call show(grid)
     ! User's next move
     print *,"Make your move."
     ! Store input in string to interpret
@@ -80,93 +76,98 @@ program tictactoe
     if (grid(1,1) == 'x') then
       if (grid(2,1) == 'x') then
         if (grid(3,1) == 'x') then
-          call win()
+          call win(grid)
         end if
       end if
       if (grid(2,2) == 'x') then
         if (grid(3,3) == 'x') then
-          call win()
+          call win(grid)
         end if
       end if
       if (grid(1,2) == 'x') then
         if (grid(1,3) == 'x') then
-          call win()
+          call win(grid)
         end if
       end if
     end if
     if (grid(1,2) == 'x') then
       if (grid(2,2) == 'x') then
         if (grid(3,2) == 'x') then
-          call win()
+          call win(grid)
         end if
       end if
     end if
     if (grid(1,3) == 'x') then
       if (grid(2,3) == 'x') then
         if (grid(3,3) == 'x') then
-          call win()
+          call win(grid)
         end if
        end if
     end if
     if (grid(2,1) == 'x') then
       if (grid(2,2) == 'x') then
         if (grid(3,2) == 'x') then
-          call win()
+          call win(grid)
         end if
       end if
     end if
     if (grid(3,1) == 'x') then
       if (grid(3,2) == 'x') then
         if (grid(3,3) == 'x') then
-          call win()
+          call win(grid)
         end if
       end if
     end if
     ! "AI" that chooses where to move
     ! TODO: "AI"
+    ! Move center if not already occupied
+    if (grid(2,2) == ' ') then
+      grid(2,2) = 'o'
+      cycle
+    end if
     ! Check if AI won
     if (grid(1,1) == 'o') then
       if (grid(2,1) == 'o') then
         if (grid(3,1) == 'o') then
-          call lose()
+          call lose(grid)
         end if
       end if
       if (grid(2,2) == 'o') then
         if (grid(3,3) == 'o') then
-          call lose()
+          call lose(grid)
         end if
       end if
       if (grid(1,2) == 'o') then
         if (grid(1,3) == 'o') then
-          call lose()
+          call lose(grid)
         end if
       end if
     end if
     if (grid(1,2) == 'o') then
       if (grid(2,2) == 'o') then
         if (grid(3,2) == 'o') then
-          call lose()
+          call lose(grid)
         end if
       end if
     end if
     if (grid(1,3) == 'o') then
       if (grid(2,3) == 'o') then
         if (grid(3,3) == 'o') then
-          call lose()
+          call lose(grid)
         end if
        end if
     end if
     if (grid(2,1) == 'o') then
       if (grid(2,2) == 'o') then
         if (grid(3,2) == 'o') then
-          call lose()
+          call lose(grid)
         end if
       end if
     end if
     if (grid(3,1) == 'o') then
       if (grid(3,2) == 'o') then
         if (grid(3,3) == 'o') then
-          call lose()
+          call lose(grid)
         end if
       end if
     end if
@@ -176,12 +177,25 @@ program tictactoe
 end program tictactoe
 
 ! Subroutines for winning and losing
-subroutine win()
+subroutine win(grid)
+  character, dimension(3, 3) :: grid
   print *,"You win!"
+  call show(grid)
   stop
 end subroutine win
 
-subroutine lose()
+subroutine lose(grid)
+  character, dimension(3, 3) :: grid
   print *,"The computer wins!"
   stop
 end subroutine lose
+
+! Subroutine to print the grid
+subroutine show(grid)
+  character, dimension(3, 3) :: grid
+  print *,""
+  print *," 123"
+  print *,'a',grid(1, 1), grid(1, 2), grid(1, 3)
+  print *,'b',grid(2, 1), grid(2, 2), grid(2, 3)
+  print *,'c',grid(3, 1), grid(3, 2), grid(3, 3)
+end subroutine show
